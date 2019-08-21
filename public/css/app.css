@@ -1,0 +1,114 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+
+* {
+    transition: cubic-bezier(.17, .67, .83, .67);
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+.side-menu {
+    padding: 0;
+    margin: 0;
+}
+
+.side-menu > li {
+    list-style: none;
+    line-height: 30px;
+    text-align: center;
+    margin: 10px;
+    text-transform: uppercase;
+    font-weight: 100 !important;
+}
+
+.side-menu > li:hover, .side-menu > li.active {
+    color: #ffffff;
+    font-weight: normal !important;
+    background: #4285f4;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+
+}
+
+.side-menu > li > a {
+    color: unset;
+}
+
+.card-header > .pagination {
+    position: absolute;
+    right: 0;
+    top: 8px;
+}
+
+.card {
+    margin: 10px;
+}
+
+.cl-title {
+    color: #4285f4;
+    margin-left: 35px;
+}
+
+.cl-span {
+    font-size: 15px;
+}
+
+.search {
+    margin: 0;
+    width: 500px;
+}
+
+.badge-Paid, .badge-Active {
+    color: #38c172;
+}
+
+.badge-Unpaid, .badge-Inactive {
+    color: #e3342f;
+}
+
+.card > .fas {
+    position: absolute;
+    zoom: 3;
+    transform: rotate(-10deg);
+}
+
+.info {
+    font-weight: bold;
+    color: #9561e2;
+}
+
+.loader-flex {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+    word-wrap: normal;
+}
+
+.span-Unpaid {
+    background: #e3342f;
+    zoom: 3;
+    position: absolute;
+    right: 5px;
+    transform: rotate(25deg);
+}
+
+.span-Paid {
+    background: #38c172;
+    zoom: 3;
+    position: absolute;
+    right: 5px;
+    transform: rotate(25deg);
+}
+
+.card-header.seen{
+    zoom: 1.5;
+}
