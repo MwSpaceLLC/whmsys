@@ -1,8 +1,8 @@
 ## About Whmsys
 
-![Whmsys Logo](public/Annotazione 2019-08-21 185553.png)
+<img alt="image" src="Annotazione 2019-08-21 185553.png" width="100%">
 
-U have one instance of whmcs but want manage data withoud pay any licenze ?
+####U have one instance of whmcs but want manage data withoud pay any licenze ?
 
 ## Contributing
 
