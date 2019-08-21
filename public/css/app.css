@@ -109,6 +109,22 @@ pre[class*="language-"] {
     transform: rotate(25deg);
 }
 
-.card-header.seen{
+.card-header.seen {
     zoom: 1.5;
+}
+
+.alert {
+    border: unset !important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+    font-weight: 100;
+    text-transform: uppercase;
+}
+
+.alert-success {
+    color: #f8fafc;
+    background: #007E33;
+}
+
+.navbar .dropdown-menu {
+    width: 100%;
 }

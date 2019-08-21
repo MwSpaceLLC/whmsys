@@ -36,3 +36,6 @@ Route::get('/invoice/{id}', 'HomeController@invoice')->name('invoice')->middlewa
 Route::get('/settings', 'HomeController@settings')->name('settings')->middleware('auth');
 
 Route::get('/search/{q}', 'HomeController@search')->name('search')->middleware('auth');
+
+// Script Run model based
+Route::get('/script/{model}/{id}/{col}/{val}', 'HomeController@script')->name('invoicePayment')->middleware('auth');

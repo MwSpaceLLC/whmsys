@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function welcome()
     {
         return view('welcome');
@@ -25,17 +27,28 @@ class HomeController extends Controller
         return view('home');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function clients()
     {
         return view('clients')->with('clients', \App\Client::orderBy('datecreated', 'DESC')->paginate(15));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function client(Request $request)
     {
         return view('client')
             ->with('client', \App\Client::findOrFail($request->id));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function clientInvoices(Request $request)
     {
         $client = \App\Client::findOrFail($request->id);
@@ -49,16 +62,27 @@ class HomeController extends Controller
             ->with('client', $client);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function invoices()
     {
         return view('invoices')->with('invoices', \App\Invoice::orderBy('date', 'DESC')->paginate(15));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function invoicesFinder(Request $request)
     {
         return view('invoices')->with('invoices', \App\Invoice::where('status', $request->status)->orderBy('date', 'DESC')->paginate(15));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function invoice(Request $request)
     {
         $invoice_child = \App\Invoice::findOrFail($request->id);
@@ -70,6 +94,36 @@ class HomeController extends Controller
             ->with('invoice', \App\Invoice::findOrFail($request->id));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|void
+     */
+    public function script(Request $request)
+    {
+
+        $model = $request->model;
+        $model = "App\\$model";
+        $selector = $request->col;
+        $value = $request->val;
+
+        if (!class_exists("\\$model"))
+            return abort(404);
+
+        try {
+            $script = $model::findOrFail($request->id);
+            $script->$selector = $value;
+            $script->save();
+
+            return back()->with('success', __("the {$request->model} has been payed"));
+        } catch (\Exception $exception) {
+
+            return back()->with('danger', $exception->getMessage());
+        }
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function settings()
     {
         return view('settings')->with('settings', \App\Setting::all());

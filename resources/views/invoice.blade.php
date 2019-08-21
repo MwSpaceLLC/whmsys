@@ -14,17 +14,39 @@
 
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header seen">{{$invoice->client->firstname}} {{$invoice->client->lastname}} #<b>{{$invoice->invoicenum}}</b>
+                    <div class="card-header seen">{{$invoice->client->firstname}} {{$invoice->client->lastname}}
+                        #<b>{{$invoice->invoicenum}}</b>
 
-                        <a href="/client/{{$invoice->client->id}}/invoices" class="btn btn-sm btn-info"><i class="fas fa-search pr-2"></i>@lang('See All')</a>
+                        @if($invoice->status === 'Unpaid')
+
+                            <a onclick="return confirm('@lang('U are shure?')');"
+                               href="/script/Invoice/{{$invoice->id}}/status/Paid" class="btn btn-sm btn-success"><i
+                                    class="far fa-money-bill-alt pr-2"></i>@lang('Pay')</a>
+                        @endif
+
+                        @if($invoice->status === 'Paid')
+
+                            <a onclick="return confirm('@lang('U are shure?')');"
+                               href="/script/Invoice/{{$invoice->id}}/status/Unpaid" class="btn btn-sm btn-danger"><i
+                                    class="far fa-money-bill-alt pr-2"></i>@lang('Unpay')</a>
+                        @endif
+
+                        <a href="/client/{{$invoice->client->id}}/invoices" class="btn btn-sm btn-info"><i
+                                class="fas fa-search pr-2"></i>@lang('See All')</a>
 
                         <span class="badge span-{{$invoice->status}}">@lang($invoice->status)</span>
                     </div>
 
                     <div class="card-body">
-                        @if (session('status'))
+                        @if (session('success'))
                             <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if(session('danger'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('danger') }}
                             </div>
                         @endif
 
@@ -50,7 +72,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-jsonview/1.2.3/jquery.jsonview.min.js"
             integrity="sha256-yB+xHoEi5PoOnEAgHNbRMIbN4cNtOXAmBzkhNE/tQlI=" crossorigin="anonymous"></script>
     <script>
-        $(function() {
+        $(function () {
             $("#json").JSONView(document.getElementById('json').dataset.json);
         });
     </script>

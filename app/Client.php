@@ -13,6 +13,8 @@ class Client extends Model
      */
     protected $table = 'tblclients';
 
+    public $timestamps = false;
+
     protected $dates = [
         'datecreated',
     ];

@@ -8,6 +8,8 @@ class Invoice extends Model
 {
     protected $table = 'tblinvoices';
 
+    public $timestamps = false;
+
     protected $dates = [
         'date',
         'duedate',
