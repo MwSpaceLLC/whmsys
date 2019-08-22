@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Invoice;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -76,6 +77,18 @@ class HomeController extends Controller
      */
     public function invoicesFinder(Request $request)
     {
+
+        if ($request->status === 'Overdue') {
+
+            return view('invoices')
+                ->with('invoices',
+                    \App\Invoice::whereIn('status', [$request->status, 'Unpaid'])
+                        ->whereDate('duedate', '<=', Carbon::today()->toDateString())
+                        ->orderBy('date', 'DESC')
+                        ->paginate(15)
+                );
+        }
+
         return view('invoices')->with('invoices', \App\Invoice::where('status', $request->status)->orderBy('date', 'DESC')->paginate(15));
     }
 
@@ -103,18 +116,24 @@ class HomeController extends Controller
 
         $model = $request->model;
         $model = "App\\$model";
-        $selector = $request->col;
-        $value = $request->val;
+
+        if(!is_array(unserialize($request->selectors))){
+            return abort(404);
+        }
 
         if (!class_exists("\\$model"))
             return abort(404);
 
         try {
             $script = $model::findOrFail($request->id);
-            $script->$selector = $value;
+
+            foreach (unserialize($request->selectors) as $key => $value) {
+                $script->$key = $value;
+            }
+
             $script->save();
 
-            return back()->with('success', __("the {$request->model} has been payed"));
+            return back()->with('success', __("the {$request->model}'s script was succesful done!"));
         } catch (\Exception $exception) {
 
             return back()->with('danger', $exception->getMessage());

@@ -20,14 +20,14 @@
                         @if($invoice->status === 'Unpaid')
 
                             <a onclick="return confirm('@lang('U are shure?')');"
-                               href="/script/Invoice/{{$invoice->id}}/status/Paid" class="btn btn-sm btn-success"><i
+                               href="/script/Invoice/{{$invoice->id}}/{{serialize(['status' => 'Paid', 'datepaid' => date('Y-m-d H:i:s')])}}" class="btn btn-sm btn-success"><i
                                     class="far fa-money-bill-alt pr-2"></i>@lang('Pay')</a>
                         @endif
 
                         @if($invoice->status === 'Paid')
 
                             <a onclick="return confirm('@lang('U are shure?')');"
-                               href="/script/Invoice/{{$invoice->id}}/status/Unpaid" class="btn btn-sm btn-danger"><i
+                               href="/script/Invoice/{{$invoice->id}}/{{serialize(['status' => 'Unpaid'])}}" class="btn btn-sm btn-danger"><i
                                     class="far fa-money-bill-alt pr-2"></i>@lang('Unpay')</a>
                         @endif
 

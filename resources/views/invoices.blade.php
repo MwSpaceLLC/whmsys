@@ -18,6 +18,7 @@
                         <a href="/invoices/Paid" class="btn btn-sm btn-success"><i class="fas fa-search-dollar pr-2"></i></i>@lang('Paid')</a>
                         <a href="/invoices/Unpaid"  class="btn btn-sm btn-danger"><i class="fas fa-search-location pr-2"></i>@lang('Unpaid')</a>
                         <a href="/invoices/Cancelled" class="btn btn-sm btn-elegant"><i class="fas fa-search pr-2"></i>@lang('Cancelled')</a>
+                        <a href="/invoices/Overdue" class="btn btn-sm btn-light"><i class="fas fa-search pr-2"></i>@lang('Overdue')</a>
                         {{ $invoices->links() }}</div>
 
                     <div class="card-body">
