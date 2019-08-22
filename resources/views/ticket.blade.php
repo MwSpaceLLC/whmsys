@@ -12,7 +12,7 @@
                         #<b>{{$ticket->tid}}</b>
 
                         <a href="/ticket/{{$ticket->id}}/cleanly" class="btn btn-sm purple-gradient cleanly">
-                            <i class="fab fa-html5 pr-2"></i>@lang('View Cleanly')</a>
+                            <i class="fab fa-html5 pr-2"></i>@lang('Cleanly')</a>
 
                     </div>
 

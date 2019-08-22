@@ -106,6 +106,14 @@ span {
     transform: rotate(25deg);
 }
 
+.span-Cancelled {
+    background: black;
+    zoom: 3;
+    position: absolute;
+    right: 5px;
+    transform: rotate(25deg);
+}
+
 .badge-Paid, .badge-Active {
     color: #38c172;
 }

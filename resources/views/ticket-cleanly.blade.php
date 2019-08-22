@@ -12,7 +12,7 @@
                         #<b>{{$ticket->tid}}</b>
 
                         <a href="/ticket/{{$ticket->id}}" class="btn btn-sm btn-default">
-                            <i class="fas fa-code pr-2"></i>@lang('View Json')</a>
+                            <i class="fas fa-code pr-2"></i>@lang('Json')</a>
 
                     </div>
 

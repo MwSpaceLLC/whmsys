@@ -26,10 +26,10 @@
                         @endif
 
                         <a href="/client/{{$invoice->client->id}}/invoices" class="btn btn-sm btn-info"><i
-                                class="fas fa-search pr-2"></i>@lang('See All')</a>
+                                class="fas fa-search pr-2"></i>@lang('All')</a>
 
                         <a href="/invoice/{{$invoice->id}}/cleanly" class="btn btn-sm purple-gradient cleanly">
-                            <i class="fab fa-html5 pr-2"></i>@lang('View Cleanly')</a>
+                            <i class="fab fa-html5 pr-2"></i>@lang('Cleanly')</a>
                     </div>
 
                     <div class="card-body">
