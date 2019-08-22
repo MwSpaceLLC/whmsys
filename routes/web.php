@@ -27,11 +27,25 @@ Route::get('/client/{id}', 'HomeController@client')->name('client')->middleware(
 
 Route::get('/client/{id}/invoices', 'HomeController@clientInvoices')->name('client.invoices')->middleware('auth');
 
+Route::get('/client/{id}/cleanly', 'HomeController@clientCleanly')->name('client.cleanly')->middleware('auth');
+
+Route::get('/client/{id}/invoices/cleanly', 'HomeController@clientInvoicesCleanly')->name('client.invoices.cleanly')->middleware('auth');
+
 Route::get('/invoices', 'HomeController@invoices')->name('invoices')->middleware('auth');
 
 Route::get('/invoices/{status}', 'HomeController@invoicesFinder')->name('invoices.find')->middleware('auth');
 
 Route::get('/invoice/{id}', 'HomeController@invoice')->name('invoice')->middleware('auth');
+
+Route::get('/invoice/{id}/cleanly', 'HomeController@invoiceCleanly')->name('invoice.cleanly')->middleware('auth');
+
+Route::get('/tickets', 'HomeController@tickets')->name('tickets')->middleware('auth');
+
+Route::get('/tickets/{status}', 'HomeController@ticketsFinder')->name('tickets.find')->middleware('auth');
+
+Route::get('/ticket/{id}', 'HomeController@ticket')->name('ticket')->middleware('auth');
+
+Route::get('/ticket/{id}/cleanly', 'HomeController@ticketCleanly')->name('ticket.cleanly')->middleware('auth');
 
 Route::get('/settings', 'HomeController@settings')->name('settings')->middleware('auth');
 

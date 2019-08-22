@@ -9,11 +9,15 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        <a href="/invoices/Paid" class="btn btn-sm btn-success"><i class="fas fa-search-dollar pr-2"></i></i>@lang('Paid')</a>
-                        <a href="/invoices/Unpaid"  class="btn btn-sm btn-danger"><i class="fas fa-search-location pr-2"></i>@lang('Unpaid')</a>
-                        <a href="/invoices/Cancelled" class="btn btn-sm btn-elegant"><i class="fas fa-search pr-2"></i>@lang('Cancelled')</a>
-                        <a href="/invoices/Overdue" class="btn btn-sm btn-light"><i class="fas fa-search pr-2"></i>@lang('Overdue')</a>
-                        {{ $invoices->links() }}</div>
+                        <a href="/invoices/Paid" class="btn btn-sm btn-success"><i
+                                class="fas fa-search-dollar pr-2"></i></i>@lang('Paid')</a>
+                        <a href="/invoices/Unpaid" class="btn btn-sm btn-danger"><i
+                                class="fas fa-search-location pr-2"></i>@lang('Unpaid')</a>
+                        <a href="/invoices/Cancelled" class="btn btn-sm btn-elegant"><i
+                                class="fas fa-search pr-2"></i>@lang('Cancelled')</a>
+                        <a href="/invoices/Overdue" class="btn btn-sm btn-light"><i
+                                class="fas fa-search pr-2"></i>@lang('Overdue')</a>
+                        {{ $tickets->links() }}</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -26,27 +30,30 @@
                             <div class="col-md-12">
 
                                 <!-- Card -->
-                                @foreach($invoices as $invoice)
+                                @foreach($tickets as $ticket)
                                     <div class="card">
-                                        <i class="fas fa-file-invoice-dollar badge-{{$invoice->status}}"></i>
+                                        <i class="fas fa-envelope badge-{{$ticket->status}}"></i>
                                         <!-- Card content -->
                                         <div class="card-body row">
 
                                             <div class="col-md-10">
                                                 <!-- Title -->
                                                 <h4 class="card-title"><span
-                                                        class="cl-title">{!! \Illuminate\Support\Str::limit($invoice->client()->first()->firstname, 25) !!}</span>
-                                                    | <span class="cl-span">{{$invoice->subtotal}}</span></h4>
+                                                        class="cl-title">{!! \Illuminate\Support\Str::limit($ticket->title, 65) !!}</span>
+                                                    | <span class="cl-span">{{$ticket->email}}</span></h4>
                                                 <!-- Text -->
                                                 <p class="card-text">
-                                                    @lang('Created at') {{$invoice->date->format(config('app.time_format'))}} /
-                                                    <span class="info">@lang('Due at') {{$invoice->duedate->format(config('app.time_format'))}}</span>
+                                                    @lang('Created at') {{$ticket->date->format(config('app.time_format'))}}
+                                                    /
+                                                    <span
+                                                        class="info">@lang('Last reply at') {{$ticket->lastreply->format(config('app.time_format'))}}</span>
                                                 </p>
                                                 <!-- Button -->
                                             </div>
 
                                             <div class="col-md-2">
-                                                <a href="/invoice/{{$invoice->id}}" class="btn btn-sm btn-primary waves-effect waves-light"><i
+                                                <a href="/ticket/{{$ticket->id}}"
+                                                   class="btn btn-sm btn-primary waves-effect waves-light"><i
                                                         class="fas fa-external-link-alt"></i></a>
                                             </div>
 

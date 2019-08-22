@@ -8,22 +8,33 @@
 
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header seen">{{$client->companyname}} |
+                    <div class="card-header seen">{{$ticket->email}} /
+                        #<b>{{$ticket->tid}}</b>
 
-                        <b>@lang('Paid:') {{$invoices->where('status','Paid')->count()}} / {{$invoices->count()}}</b>
+                        <a href="/ticket/{{$ticket->id}}/cleanly" class="btn btn-sm purple-gradient cleanly">
+                            <i class="fab fa-html5 pr-2"></i>@lang('View Cleanly')</a>
 
                     </div>
 
                     <div class="card-body">
-                        @if (session('status'))
+
+                        <span class="badge span-{{$ticket->status}}">@lang($ticket->status)</span>
+
+                        @if (session('success'))
                             <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if(session('danger'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('danger') }}
                             </div>
                         @endif
 
                         <div class="row">
                             <div class="col-md-12">
-                                <code id="json" data-json="{{$invoices}}"></code>
+                                <code id="json" data-json="{{$ticket}}"></code>
                             </div>
                         </div>
                     </div>
@@ -43,7 +54,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-jsonview/1.2.3/jquery.jsonview.min.js"
             integrity="sha256-yB+xHoEi5PoOnEAgHNbRMIbN4cNtOXAmBzkhNE/tQlI=" crossorigin="anonymous"></script>
     <script>
-        $(function() {
+        $(function () {
             $("#json").JSONView(document.getElementById('json').dataset.json);
         });
     </script>

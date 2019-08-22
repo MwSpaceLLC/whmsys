@@ -32,13 +32,6 @@
 </head>
 <body>
 
-{{--<div class="loader-flex">--}}
-{{--    <div class="spinner-grow text-primary" role="status">--}}
-{{--        <span class="sr-only">Loading...</span>--}}
-{{--    </div>--}}
-{{--</div>--}}
-
-
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
@@ -61,7 +54,7 @@
 
                     <div class="ui search">
                         <div class="ui icon input">
-                            <input class="prompt" type="text" placeholder="@lang('Find Client, Invoices')">
+                            <input class="prompt" type="text" placeholder="@lang('Find Client, Invoices & Tickets')">
                             <i class="search icon"></i>
                         </div>
                         <div class="results"></div>

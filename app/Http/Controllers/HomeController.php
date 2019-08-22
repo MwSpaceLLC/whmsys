@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Invoice;
+use App\Setting;
+use App\Ticket;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function welcome()
     {
@@ -21,7 +28,7 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function home()
     {
@@ -29,30 +36,36 @@ class HomeController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function clients()
     {
-        return view('clients')->with('clients', \App\Client::orderBy('datecreated', 'DESC')->paginate(15));
+        return view('clients')->with('clients', Client::orderBy('datecreated', 'DESC')->paginate(15));
     }
 
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function client(Request $request)
     {
         return view('client')
-            ->with('client', \App\Client::findOrFail($request->id));
+            ->with('client', Client::findOrFail($request->id));
+    }
+
+    public function clientCleanly(Request $request)
+    {
+        return view('client-cleanly')
+            ->with('client', Client::findOrFail($request->id));
     }
 
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function clientInvoices(Request $request)
     {
-        $client = \App\Client::findOrFail($request->id);
+        $client = Client::findOrFail($request->id);
 
         $invoices = $client->invoice()->get()->map(function ($item) {
             return $item->setAttribute('invoice_items', $item->item()->get());
@@ -64,16 +77,16 @@ class HomeController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function invoices()
     {
-        return view('invoices')->with('invoices', \App\Invoice::orderBy('date', 'DESC')->paginate(15));
+        return view('invoices')->with('invoices', Invoice::orderBy('date', 'DESC')->paginate(15));
     }
 
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function invoicesFinder(Request $request)
     {
@@ -82,34 +95,65 @@ class HomeController extends Controller
 
             return view('invoices')
                 ->with('invoices',
-                    \App\Invoice::whereIn('status', [$request->status, 'Unpaid'])
+                    Invoice::whereIn('status', [$request->status, 'Unpaid'])
                         ->whereDate('duedate', '<=', Carbon::today()->toDateString())
                         ->orderBy('date', 'DESC')
                         ->paginate(15)
                 );
         }
 
-        return view('invoices')->with('invoices', \App\Invoice::where('status', $request->status)->orderBy('date', 'DESC')->paginate(15));
+        return view('invoices')->with('invoices', Invoice::where('status', $request->status)->orderBy('date', 'DESC')->paginate(15));
     }
 
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function invoice(Request $request)
     {
-        $invoice_child = \App\Invoice::findOrFail($request->id);
+        $invoice_child = Invoice::findOrFail($request->id);
 
         $invoice_child->setAttribute('invoice_item', $invoice_child->item()->get());
 
         return view('invoice')
             ->with('invoice_child', $invoice_child)
-            ->with('invoice', \App\Invoice::findOrFail($request->id));
+            ->with('invoice', Invoice::findOrFail($request->id));
+    }
+
+    public function invoiceCleanly(Request $request)
+    {
+        $invoice_child = Invoice::findOrFail($request->id);
+
+        $invoice_child->setAttribute('invoice_item', $invoice_child->item()->get());
+
+        return view('invoice-cleanly')
+            ->with('invoice_child', $invoice_child)
+            ->with('invoice', Invoice::findOrFail($request->id));
+    }
+
+    public function tickets()
+    {
+        return view('tickets')->with('tickets', Ticket::orderBy('date', 'DESC')->paginate(15));
+    }
+
+    public function ticketsFinder(Request $request)
+    {
+
+    }
+
+    public function ticket(Request $request)
+    {
+        return view('ticket')->with('ticket', Ticket::findOrFail($request->id));
+    }
+
+    public function ticketCleanly(Request $request)
+    {
+        return view('ticket-cleanly')->with('ticket', Ticket::findOrFail($request->id));
     }
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|void
+     * @return RedirectResponse|void
      */
     public function script(Request $request)
     {
@@ -117,7 +161,7 @@ class HomeController extends Controller
         $model = $request->model;
         $model = "App\\$model";
 
-        if(!is_array(unserialize($request->selectors))){
+        if (!is_array(unserialize($request->selectors))) {
             return abort(404);
         }
 
@@ -134,18 +178,18 @@ class HomeController extends Controller
             $script->save();
 
             return back()->with('success', __("the {$request->model}'s script was succesful done!"));
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
 
             return back()->with('danger', $exception->getMessage());
         }
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function settings()
     {
-        return view('settings')->with('settings', \App\Setting::all());
+        return view('settings')->with('settings', Setting::all());
     }
 
     public function logout()
@@ -187,8 +231,21 @@ class HomeController extends Controller
                 ];
             })->toArray();
 
+        $tickets = Ticket::where('email', 'like', '%' . $request->q . '%')
+            ->orWhere('name', 'like', '%' . $request->q . '%')
+            ->orWhere('message', 'like', '%' . $request->q . '%')->get()
+            ->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'category' => __('tickets'),
+                    'display' => ucfirst(strtolower($item->name)),
+                    'description' => "{$item->title}",
+                    'url' => "/ticket/$item->id",
+                ];
+            })->toArray();
+
         return response()->json([
-            'items' => array_merge($clients, $invoices)
+            'items' => mb_convert_encoding(array_merge($tickets, array_merge($clients, $invoices)), 'UTF-8', 'UTF-8')
         ]);
     }
 

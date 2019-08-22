@@ -3,18 +3,12 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-2">
-                <ul class="side-menu">
-                    <li><a href="/home">@lang('dashboard')</a></li>
-                    <li><a href="/clients">@lang('clients')</a></li>
-                    <li><a href="/invoices">@lang('invoices')</a></li>
-                    <li class="active"><a href="/settings">@lang('settings')</a></li>
-                </ul>
-            </div>
+
+            @include('components.side')
 
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">@lang('Admin Settings')</div>
+                    <div class="card-header"><h2>@lang('Admin Settings') </h2></div>
 
                     <div class="card-body">
                         @if (session('status'))

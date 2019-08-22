@@ -3,14 +3,8 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-2">
-                <ul class="side-menu">
-                    <li class="active"><a href="/home">@lang('dashboard')</a></li>
-                    <li><a href="/clients">@lang('clients')</a></li>
-                    <li><a href="/invoices">@lang('invoices')</a></li>
-                    <li><a href="/settings">@lang('settings')</a></li>
-                </ul>
-            </div>
+
+            @include('components.side')
 
             <div class="col-md-10">
                 <div class="card">

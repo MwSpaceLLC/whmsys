@@ -30,7 +30,7 @@
     font-weight: normal !important;
     background: #4285f4;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
-
+    clip-path: polygon(0 0, 100% 13%, 100% 100%, 19% 100%);
 }
 
 .side-menu > li > a {
@@ -61,14 +61,6 @@
     width: 500px;
 }
 
-.badge-Paid, .badge-Active {
-    color: #38c172;
-}
-
-.badge-Unpaid, .badge-Inactive {
-    color: #e3342f;
-}
-
 .card > .fas {
     position: absolute;
     zoom: 3;
@@ -93,6 +85,11 @@ pre[class*="language-"] {
     word-wrap: normal;
 }
 
+span {
+    z-index: 999;
+}
+
+/*Invoice Management*/
 .span-Unpaid {
     background: #e3342f;
     zoom: 3;
@@ -107,6 +104,61 @@ pre[class*="language-"] {
     position: absolute;
     right: 5px;
     transform: rotate(25deg);
+}
+
+.badge-Paid, .badge-Active {
+    color: #38c172;
+}
+
+.badge-Unpaid, .badge-Inactive {
+    color: #e3342f;
+}
+
+/* Client Management*/
+
+.span-Active {
+    background: #38c172;
+    zoom: 3;
+    position: absolute;
+    right: 5px;
+    transform: rotate(25deg);
+}
+
+/* Ticket management*/
+.span-Closed {
+    background: #38c172;
+    zoom: 3;
+    position: absolute;
+    right: 5px;
+    transform: rotate(25deg);
+}
+
+.span-Open {
+    background: #4285f4;
+    zoom: 3;
+    position: absolute;
+    right: 5px;
+    transform: rotate(25deg);
+}
+
+.span-Answered {
+    background: #f6993f;
+    zoom: 3;
+    position: absolute;
+    right: 5px;
+    transform: rotate(25deg);
+}
+
+.badge-Open {
+    color: #4285f4;
+}
+
+.badge-Closed {
+    color: #38c172;
+}
+
+.badge-Answered {
+    color: coral;
 }
 
 .card-header.seen {
@@ -134,4 +186,36 @@ pre[class*="language-"] {
         max-width: 1280px;
         zoom: 1.1;
     }
+}
+
+
+.purple-gradient.cleanly {
+    clip-path: polygon(0 0, 100% 13%, 100% 100%, 12% 100%);
+}
+
+.btn {
+    clip-path: polygon(0 0, 100% 13%, 100% 100%, 19% 100%);
+}
+
+span {
+    border-radius: 20px !important;
+}
+
+[scope="row"] {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.invoice-item > tbody > tr {
+    background-color: rgba(96, 125, 139, 0);
+}
+
+.invoice-action {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+ul {
+    list-style: none;
 }

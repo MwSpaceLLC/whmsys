@@ -3,14 +3,8 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-2">
-                <ul class="side-menu">
-                    <li><a href="/home">@lang('dashboard')</a></li>
-                    <li><a href="/clients">@lang('clients')</a></li>
-                    <li class="active"><a href="/invoices">@lang('invoices')</a></li>
-                    <li><a href="/settings">@lang('settings')</a></li>
-                </ul>
-            </div>
+
+            @include('components.side')
 
             <div class="col-md-10">
                 <div class="card">
@@ -34,10 +28,14 @@
                         <a href="/client/{{$invoice->client->id}}/invoices" class="btn btn-sm btn-info"><i
                                 class="fas fa-search pr-2"></i>@lang('See All')</a>
 
-                        <span class="badge span-{{$invoice->status}}">@lang($invoice->status)</span>
+                        <a href="/invoice/{{$invoice->id}}/cleanly" class="btn btn-sm purple-gradient cleanly">
+                            <i class="fab fa-html5 pr-2"></i>@lang('View Cleanly')</a>
                     </div>
 
                     <div class="card-body">
+
+                        <span class="badge span-{{$invoice->status}}">@lang($invoice->status)</span>
+
                         @if (session('success'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('success') }}
