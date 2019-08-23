@@ -152,7 +152,7 @@ QUEUE_CONNECTION=sync
 SESSION_DRIVER=file
 SESSION_LIFETIME=120
 EOF;
-        if ($this->e->mail) {
+        if (isset($this->e->mail)) {
             $env .= <<<EOF
 MAIL_DRIVER={$this->e->mail}
 MAIL_HOST={$this->e->mailhost}
