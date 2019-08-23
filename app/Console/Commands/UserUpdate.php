@@ -45,24 +45,30 @@ class UserUpdate extends Command
 
         do {
             do {
-                $password = $this->ask('ENTER: NEW PASSWORD FOR USER');
+                $password = $this->secret('ENTER: NEW PASSWORD FOR USER');
             } while ($password === null);
             do {
-                $confirm = $this->ask('CONFIRM: PASSWORD FOR USER');
+                $confirm = $this->secret('CONFIRM: PASSWORD FOR USER');
             } while ($confirm === null);
-        } while (strcasecmp($confirm, $password) === 0);
+
+            if (strcasecmp($confirm, $password) !== 0) {
+
+                $this->error("ERROR: PASSWORDS NOT MATCH");
+            }
+
+        } while (strcasecmp($confirm, $password) !== 0);
 
 
         if ($user = User::where('email', $email)->first()) {
             $user->password = Hash::make($password);
             $user->save();
 
-            $this->warn("Command succesfull => $user");
-            $this->info("Email: $email");
-            $this->info("Password: $password");
+            $this->warn(strtoupper($user) . "'S PASSWORD UPDATE SUCCESFULL");
+            $this->info("EMAIL: $email");
+            $this->info("PASSWORD: $password");
         } else {
 
-            $this->error("$email not found in database");
+            $this->error(strtoupper($user) . " DO NOT EXIST");
         }
 
     }
