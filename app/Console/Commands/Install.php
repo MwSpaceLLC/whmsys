@@ -128,7 +128,7 @@ APP_LOGIN=
 APP_KEY=
 APP_DEBUG=true
 APP_SSL=true
-APP_URL=http://{$this->e->domain}
+APP_URL={$this->e->domain}
 
 LOG_CHANNEL=stack
 
@@ -163,7 +163,7 @@ EOF;
     private function install()
     {
         do {
-            $this->e->domain = $this->ask('ENTER: DOMAIN NAME');
+            $this->e->domain = $this->ask('ENTER: DOMAIN NAME (http://)');
         } while ($this->e->domain === null);
 
         $this->setDatabase();
