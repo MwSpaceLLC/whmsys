@@ -55,6 +55,8 @@ class Install extends Command
             $this->error("SYSTEM ALREADY INSTALLED");
         }
 
+        Artisan::call('key:generate');
+
         sleep(2);
 
         $bar = $this->output->createProgressBar(1800);
@@ -101,21 +103,25 @@ class Install extends Command
         do {
             $this->e->mail = $this->choice('ENTER: MAIL DRIVER', ['mail', 'smtp'], 'mail');
         } while ($this->e->mail === null);
-        do {
-            $this->e->mailhost = $this->ask('ENTER: MAIL HOST');
-        } while ($this->e->mailhost === null);
-        do {
-            $this->e->mailport = $this->ask('ENTER: MAIL PORT');
-        } while ($this->e->mailport === null);
-        do {
-            $this->e->mailuser = $this->ask('ENTER: MAIL NAME');
-        } while ($this->e->mailuser === null);
-        do {
-            $this->e->mailpass = $this->ask('ENTER: MAIL PASSWORD');
-        } while ($this->e->mailpass === null);
-        do {
-            $this->e->enctype = $this->choice('ENTER: MAIL ENCTYPE', ['tls', 'ssl'], 'tls');
-        } while ($this->e->enctype === null);
+
+        if ($this->e->mail !== 'mail') {
+            do {
+                $this->e->mailhost = $this->ask('ENTER: MAIL HOST');
+            } while ($this->e->mailhost === null);
+            do {
+                $this->e->mailport = $this->ask('ENTER: MAIL PORT');
+            } while ($this->e->mailport === null);
+            do {
+                $this->e->mailuser = $this->ask('ENTER: MAIL NAME');
+            } while ($this->e->mailuser === null);
+            do {
+                $this->e->mailpass = $this->ask('ENTER: MAIL PASSWORD');
+            } while ($this->e->mailpass === null);
+            do {
+                $this->e->enctype = $this->choice('ENTER: MAIL ENCTYPE', ['tls', 'ssl'], 'tls');
+            } while ($this->e->enctype === null);
+        }
+
     }
 
     private function setEnv()
@@ -174,6 +180,5 @@ EOF;
 
         $this->setEnv();
 
-        Artisan::call('key:generate');
     }
 }
