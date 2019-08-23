@@ -10,6 +10,10 @@ U have one instance of whmcs but want manage data withoud pay any licenze ?
 
 `$ composer install`
 
+> Now, clear app dev cache:
+
+`$ php artisan optimize`
+
 > Now, u can go at www.domain.com & u can see 503 | PLEASE INSTALL WHMSYS. In to shell:
 
 `$ php artisan install`
@@ -19,10 +23,6 @@ U have one instance of whmcs but want manage data withoud pay any licenze ?
 > If u have any issue with repo version, u can try:
 
 `$ composer clearcache`
-
-> If u have any issue with cache app:
-
-`$ php artisan optimize`
 
 <hr>
 
