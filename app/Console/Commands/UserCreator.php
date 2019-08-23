@@ -14,7 +14,7 @@ class UserCreator extends Command
      *
      * @var string
      */
-    protected $signature = 'make:user {email}';
+    protected $signature = 'make:user';
 
     /**
      * The console command description.
