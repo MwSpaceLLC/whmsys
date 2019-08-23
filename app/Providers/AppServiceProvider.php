@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
 
         Schema::defaultStringLength(191);
 
-        if (!$request->secure() && config('force_https') && !strpos($request->url(), 'localhost') !== false) {
+        if (!$request->secure() && env('APP_SSL') && !strpos($request->url(), 'localhost') !== false) {
             return redirect()->secure($request->getRequestUri());
         }
 

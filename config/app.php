@@ -16,7 +16,7 @@ return [
 
     'time_format' => 'd/m/Y',
 
-    'force_https' => true,
+    'force_https' => env('APP_SSL', true),
 
     /*
     |--------------------------------------------------------------------------

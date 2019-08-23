@@ -127,6 +127,7 @@ APP_ENV=local
 APP_LOGIN=
 APP_KEY=
 APP_DEBUG=true
+APP_SSL=true
 APP_URL=http://{$this->e->domain}
 
 LOG_CHANNEL=stack
