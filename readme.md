@@ -2,16 +2,28 @@
 
 <img alt="image" src="Annotazione 2019-08-21 185553.png" width="100%">
 
-####U have one instance of whmcs but want manage data withoud pay any licenze ?
+U have one instance of whmcs but want manage data withoud pay any licenze ?
 
-## Contributing
+👌 This repo are in (beta)
 
-Thank you for considering contributing to the us! The contribution guide can be found in the [Developers Site](https://mwspace.com).
+> To start download package & install vendors:
 
-## Security Vulnerabilities
+`$ composer install`
 
-If you discover a security vulnerability within us, please send an e-mail to Support via [support@mwspace.com](mailto:support@mwspace.com). All security vulnerabilities will be promptly addressed.
+> Now, u can go at www.domain.com & u can see 503 | PLEASE INSTALL WHMSYS. In to shell:
 
-## License
+`$ php artisan install`
 
-The Whmsys is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> The system will install database & basic function
+
+> If u have any issue with repo version, u can try:
+
+`$ composer clearcache`
+
+> If u have any issue with cache app:
+
+`$ php artisan optimize`
+
+<hr>
+
+✨ Now enjoi with whmcs database
