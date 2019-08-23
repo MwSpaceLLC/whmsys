@@ -24,6 +24,14 @@ U have one instance of whmcs but want manage data withoud pay any licenze ?
 
 `$ composer clearcache`
 
+> For generate an Admin, u can user:
+
+`$ php artisan make:user`
+
+### !IMPORTANT - For login as admin & user, u must update user's & admin's password hash:
+
+`$ php artisan user:passwd`
+
 <hr>
 
 ✨ Now enjoi with whmcs database
