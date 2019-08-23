@@ -49,20 +49,20 @@ class UserCreator extends Command
         $username = ucfirst(explode('@', $email)[0]);
         $password = Str::random(8);
         $user = new User;
-        $user->name = $username;
+        $user->username = $username;
         $user->email = $email;
         $user->password = Hash::make($password);
 
         if (!User::where('email', $user->email)->first()) {
 
             $user->save();
-            $this->warn("Command succesfull => $user");
-            $this->info("Username: $username");
-            $this->info("Email: $email");
-            $this->info("Password: $password");
+            $this->warn(strtoupper($user) . "'S ACCOUNT GENERATE SUCCESFULL");
+            $this->info("EMAIL: $email");
+            $this->info("USERNAME: $username");
+            $this->info("PASSWORD: $password");
 
         } else {
-            $this->error("$username already exist in Database");
+            $this->error(strtoupper($user) . " ALREADY EXIST");
         }
 
     }

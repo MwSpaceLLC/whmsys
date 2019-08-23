@@ -65,7 +65,7 @@ class UserUpdate extends Command
 
             $this->warn(strtoupper($user) . "'S PASSWORD UPDATE SUCCESFULL");
             $this->info("EMAIL: $email");
-            $this->info("PASSWORD: $password");
+            $this->info("PASSWORD: *********");
         } else {
 
             $this->error(strtoupper($user) . " DO NOT EXIST");
