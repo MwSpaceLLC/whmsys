@@ -68,7 +68,7 @@ class UserUpdate extends Command
             $this->info("PASSWORD: *********");
         } else {
 
-            $this->error(strtoupper($user) . " DO NOT EXIST");
+            $this->error(strtoupper($email) . " DO NOT EXIST");
         }
 
     }
