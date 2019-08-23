@@ -45,6 +45,8 @@ class Install extends Command
     {
 
         $this->info("WELCOME TO WHMSYS INSTALLATION:");
+
+        Artisan::call('optimize');
         sleep(2);
 
         if (!file_exists(base_path('.env'))) {
@@ -57,7 +59,7 @@ class Install extends Command
         }
 
         Artisan::call('key:generate');
-
+        Artisan::call('optimize');
         sleep(1);
 
         $this->info("");
@@ -182,7 +184,5 @@ EOF;
         $this->e->login = rtrim($this->e->domain, '/') . '/' . $this->e->path;
 
         $this->setEnv();
-
-        Artisan::call('optimize');
     }
 }
