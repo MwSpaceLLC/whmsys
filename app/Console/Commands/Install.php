@@ -145,7 +145,7 @@ DB_HOST={$this->e->database}
 DB_PORT={$this->e->port}
 DB_DATABASE={$this->e->name}
 DB_USERNAME={$this->e->username}
-DB_PASSWORD={$this->e->password}
+DB_PASSWORD="{$this->e->password}"
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file
