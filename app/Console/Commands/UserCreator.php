@@ -40,11 +40,17 @@ class UserCreator extends Command
      */
     public function handle()
     {
-        $username = ucfirst(explode('@', $this->argument('email'))[0]);
+
+        do {
+            $email = $this->ask('ENTER: EMAIL FOR USER');
+
+        } while ($email === null);
+
+        $username = ucfirst(explode('@', $email)[0]);
         $password = Str::random(8);
         $user = new User;
         $user->name = $username;
-        $user->email = $this->argument('email');
+        $user->email = $email;
         $user->password = Hash::make($password);
 
         if (!User::where('email', $user->email)->first()) {
@@ -52,7 +58,7 @@ class UserCreator extends Command
             $user->save();
             $this->warn("Command succesfull => $user");
             $this->info("Username: $username");
-            $this->info("Email: {$this->argument('email')}");
+            $this->info("Email: $email");
             $this->info("Password: $password");
 
         } else {

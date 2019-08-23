@@ -40,14 +40,18 @@ class UserUpdate extends Command
     public function handle()
     {
         do {
-            $email = $this->ask('What is the email');
-
+            $email = $this->ask('ENTER: EMAIL FOR USER');
         } while ($email === null);
 
         do {
-            $password = $this->secret('What is the new password?');
+            do {
+                $password = $this->ask('ENTER: NEW PASSWORD FOR USER');
+            } while ($password === null);
+            do {
+                $confirm = $this->ask('CONFIRM: PASSWORD FOR USER');
+            } while ($confirm === null);
+        } while (strcasecmp($confirm, $password) === 0);
 
-        } while ($password === null);
 
         if ($user = User::where('email', $email)->first()) {
             $user->password = Hash::make($password);
@@ -60,5 +64,6 @@ class UserUpdate extends Command
 
             $this->error("$email not found in database");
         }
+
     }
 }

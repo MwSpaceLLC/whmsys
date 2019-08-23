@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use stdClass;
 
 class Install extends Command
@@ -70,7 +71,7 @@ class Install extends Command
 
         $this->info("PLEASE CHECK LOGIN PATH:");
 
-        $this->info("PLEASE CHECK LOGIN PATH:");
+        $this->info($this->e->login);
 
     }
 
@@ -94,7 +95,7 @@ class Install extends Command
         } while ($this->e->username === null);
 
         do {
-            $this->e->password = $this->ask('ENTER: DATABASE PASSWORD');
+            $this->e->password = $this->secret('ENTER: DATABASE PASSWORD');
         } while ($this->e->password === null);
     }
 
@@ -115,7 +116,7 @@ class Install extends Command
                 $this->e->mailuser = $this->ask('ENTER: MAIL NAME');
             } while ($this->e->mailuser === null);
             do {
-                $this->e->mailpass = $this->ask('ENTER: MAIL PASSWORD');
+                $this->e->mailpass = $this->secret('ENTER: MAIL PASSWORD');
             } while ($this->e->mailpass === null);
             do {
                 $this->e->enctype = $this->choice('ENTER: MAIL ENCTYPE', ['tls', 'ssl'], 'tls');
@@ -179,6 +180,10 @@ EOF;
         }
 
         $this->setEnv();
+
+        $this->e->path = md5(Str::random(8));
+
+        $this->e->login = env('APP_URL') . '/' . $this->e->path;
 
     }
 }
