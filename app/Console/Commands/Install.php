@@ -53,22 +53,21 @@ class Install extends Command
             $this->install();
         } else {
 
-            $this->error("SYSTEM ALREADY INSTALLED");
+            return $this->error("SYSTEM ALREADY INSTALLED");
         }
 
         Artisan::call('key:generate');
 
+        sleep(1);
+
+        $this->info("");
+        $this->info("PLEASE WAIT...");
         sleep(2);
 
-        $bar = $this->output->createProgressBar(1800);
-        $bar->start();
-        for ($i = 0; $i++;)
-            if ($i > 1800) {
-                break;
-            }
-        $bar->finish();
-        $this->info("SYSTEM WAS INSTALLED SUCCESSFULLY");
+        $this->info("");
+        $this->info("!! SYSTEM WAS INSTALLED SUCCESSFULLY !!");
 
+        $this->info("");
         $this->info("PLEASE CHECK LOGIN PATH:");
 
         $this->info($this->e->login);
@@ -131,7 +130,7 @@ class Install extends Command
 APP_VERSION=1.0
 APP_NAME=Whmsys
 APP_ENV=local
-APP_LOGIN=
+APP_LOGIN={$this->e->path}
 APP_KEY=
 APP_DEBUG=true
 APP_SSL=true
@@ -164,7 +163,7 @@ EOF;
 
         }
 
-        Storage::disk('local')->put(base_path('.env'), $env);
+        Storage::disk('base')->put('.env', $env);
     }
 
     private function install()
@@ -179,11 +178,11 @@ EOF;
             $this->setMailDriver();
         }
 
+        $this->e->path = md5(Str::random(8));
+        $this->e->login = rtrim($this->e->domain, '/') . '/' . $this->e->path;
+
         $this->setEnv();
 
-        $this->e->path = md5(Str::random(8));
-
-        $this->e->login = env('APP_URL') . '/' . $this->e->path;
-
+        Artisan::call('optimize');
     }
 }
