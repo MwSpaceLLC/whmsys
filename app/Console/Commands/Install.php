@@ -84,9 +84,15 @@ class Install extends Command
         do {
             $this->e->database = $this->ask('ENTER: DATABASE HOST');
         } while ($this->e->database === null);
-        do {
-            $this->e->port = $this->ask('ENTER: DATABASE PORT');
-        } while ($this->e->port === null);
+
+        if ($this->e->database !== 'localhost') {
+            do {
+                $this->e->port = $this->ask('ENTER: DATABASE PORT');
+            } while ($this->e->port === null);
+        } else {
+            $this->e->port = 3306;
+        }
+
         do {
             $this->e->name = $this->ask('ENTER: DATABASE NAME');
         } while ($this->e->name === null);
