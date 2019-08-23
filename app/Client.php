@@ -11,7 +11,7 @@ class Client extends Model
      *
      * @var string
      */
-    protected $table = 'tbladmins';
+    protected $table = 'tblclients';
 
     public $timestamps = false;
 
