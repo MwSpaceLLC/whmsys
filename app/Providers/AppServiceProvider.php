@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,10 +21,20 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      *
+     * @param Request $request
      * @return void
      */
-    public function boot()
+    public function boot(Request $request)
     {
+        if (!file_exists(base_path('.env')) && $request->userAgent() !== 'Symfony') {
+            return abort(503, 'PLEASE INSTALL WHMSYS');
+        }
+
         Schema::defaultStringLength(191);
+
+        if (!$request->secure() && config('force_https') && !strpos($request->url(), 'localhost') !== false) {
+            return redirect()->secure($request->getRequestUri());
+        }
+
     }
 }

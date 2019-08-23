@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 return [
 
     /*
@@ -10,9 +12,11 @@ return [
 
     'version' => env('APP_VERSION', 0.1),
 
-    'login_path' => env('APP_LOGIN', \Illuminate\Support\Str::random(8)),
+    'login_path' => env('APP_LOGIN', Str::random(8)),
 
     'time_format' => 'd/m/Y',
+
+    'force_https' => true,
 
     /*
     |--------------------------------------------------------------------------

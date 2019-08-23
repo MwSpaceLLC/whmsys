@@ -180,6 +180,7 @@ class HomeController extends Controller
             return back()->with('success', __("the {$request->model}'s script was succesful done!"));
         } catch (Exception $exception) {
 
+
             return back()->with('danger', $exception->getMessage());
         }
     }
