@@ -19,7 +19,7 @@ return [
     'force_https' => env('APP_SSL', true),
 
     'allow_ip' => [
-        '79.8.229.184',
+        env('IP_APP_ADMIN'),
         '127.0.0.1'
     ],
 

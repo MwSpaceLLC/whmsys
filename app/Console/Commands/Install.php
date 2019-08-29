@@ -143,6 +143,7 @@ APP_KEY=
 APP_DEBUG=true
 APP_SSL=true
 APP_URL={$this->e->domain}
+IP_APP_ADMIN=127.0.0.1
 
 LOG_CHANNEL=stack
 
