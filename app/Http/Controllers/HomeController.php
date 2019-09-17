@@ -206,7 +206,7 @@ class HomeController extends Controller
     {
         foreach (Client::all()->pluck('email') as $email) {
             if ('' !== $email) {
-                echo "$email,\n";
+                echo "$email\n";
             }
         }
     }
