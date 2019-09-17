@@ -9,12 +9,10 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        <a href="/tickets/Open" class="btn btn-sm btn-info"><i
-                                class="fas fa-search-dollar pr-2"></i></i>@lang('Open')</a>
-                        <a href="/invoices/Answered" class="btn btn-sm btn-warning"><i
-                                class="fas fa-search-location pr-2"></i>@lang('Answered')</a>
-                        <a href="/invoices/Closed" class="btn btn-sm btn-success"><i
-                                class="fas fa-search pr-2"></i>@lang('Closed')</a>
+
+                        <a href="/ticket/open" class="btn btn-sm btn-success"><i
+                                class="fas fa-plus pr-2"></i>@lang('Open')</a>
+
                         {{ $tickets->links() }}</div>
 
                     <div class="card-body">

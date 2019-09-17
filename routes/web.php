@@ -41,6 +41,8 @@ Route::get('/invoice/{id}/cleanly', 'HomeController@invoiceCleanly')->name('invo
 
 Route::get('/tickets', 'HomeController@tickets')->name('tickets')->middleware('auth');
 
+Route::get('/ticket/open', 'HomeController@ticketOpen')->name('tickets.open')->middleware('auth');
+
 Route::get('/tickets/{status}', 'HomeController@ticketsFinder')->name('tickets.find')->middleware('auth');
 
 Route::get('/ticket/{id}', 'HomeController@ticket')->name('ticket')->middleware('auth');
@@ -48,6 +50,10 @@ Route::get('/ticket/{id}', 'HomeController@ticket')->name('ticket')->middleware(
 Route::get('/ticket/{id}/cleanly', 'HomeController@ticketCleanly')->name('ticket.cleanly')->middleware('auth');
 
 Route::get('/settings', 'HomeController@settings')->name('settings')->middleware('auth');
+
+Route::get('/export', 'HomeController@export')->name('export')->middleware('auth');
+
+Route::get('/export/{comand}', 'HomeController@exportCommand')->name('export.comand')->middleware('auth');
 
 Route::get('/search/{q}', 'HomeController@search')->name('search')->middleware('auth');
 

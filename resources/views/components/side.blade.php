@@ -5,6 +5,7 @@
         <li><a href="/invoices">@lang('invoices')</a></li>
         <li><a href="/tickets">@lang('tickets')</a></li>
         <li><a href="/settings">@lang('settings')</a></li>
+        <li><a href="/export">@lang('export')</a></li>
     </ul>
 </div>
 

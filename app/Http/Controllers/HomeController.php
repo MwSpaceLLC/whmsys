@@ -138,12 +138,16 @@ class HomeController extends Controller
 
     public function ticketsFinder(Request $request)
     {
-
     }
 
     public function ticket(Request $request)
     {
         return view('ticket')->with('ticket', Ticket::findOrFail($request->id));
+    }
+
+    public function ticketOpen()
+    {
+        return view('ticket-open');
     }
 
     public function ticketCleanly(Request $request)
@@ -191,6 +195,20 @@ class HomeController extends Controller
     public function settings()
     {
         return view('settings')->with('settings', Setting::all());
+    }
+
+    public function export()
+    {
+        return view('export')->with('export', Client::all()->take(10));
+    }
+
+    public function exportCommand(Request $request)
+    {
+        foreach (Client::all()->pluck('email') as $email) {
+            if ('' !== $email) {
+                echo "$email,\n";
+            }
+        }
     }
 
     public function logout()

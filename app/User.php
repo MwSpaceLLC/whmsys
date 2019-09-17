@@ -11,6 +11,8 @@ class User extends Authenticatable
 
     protected $table = 'tbladmins';
 
+    protected $rememberTokenName = false;
+
     /**
      * The attributes that are mass assignable.
      *
